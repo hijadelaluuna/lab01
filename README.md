@@ -4,77 +4,97 @@
 
 ## Tasks
 
-- [ ] 1. Ознакомиться со ссылками учебного материала
-- [ ] 2. Выполнить инструкцию учебного материала
-- [ ] 3. Составить отчет и отправить ссылку личным сообщением в **Slack**
+- [X] 1. Ознакомиться со ссылками учебного материала
+- [X] 2. Выполнить инструкцию учебного материала
+- [X] 3. Составить отчет и отправить ссылку личным сообщением в **Slack**
 
 ## Tutorial
+Создание переменных окружения 'GITHUB_USERNAME и 'GIST_TOKEN , а также связывание команды edit с вызовом текстового редактора nano
 
-```bash
-$ export GITHUB_USERNAME=<имя_пользователя>
+
+
+# Присвоение переменной GITHUB_USERNAME имени пользователя на Github
+$ export GITHUB_USERNAME=hijadelaluuna
 $ export GIST_TOKEN=<сохраненный_токен>
-$ alias edit=<nano|vi|vim|subl>
-```
+$ alias edit=nano
 
-```ShellSession
-$ mkdir -p ${GITHUB_USERNAME}/workspace
-$ cd ${GITHUB_USERNAME}/workspace
-$ pwd
-$ cd ..
-$ pwd
-```
 
-```ShellSession
+Создание директории рабочей директории **workspace.
+
+$ sudo mkdir -p $hijadelaluuna/workspace # создание директории workspace
+$ cd $hijadelaluuna/workspace # переход к директории
+$ pwd # полный путь до директории workspace
+luna /workspace 
+$ cd .. # переход выше
+$ pwd
+/home/luna
+
+
+# Создание дочерних директорий в каталоге workspace
+
 $ mkdir -p workspace/tasks/
 $ mkdir -p workspace/projects/
 $ mkdir -p workspace/reports/
 $ cd workspace
-```
+$ls node  projects  reports  scripts  tasks
 
-```ShellSession
-# Debian
+
+Установка *nodejs в рабочий каталог
+
+# Archlinux
 $ wget https://nodejs.org/dist/v6.11.5/node-v6.11.5-linux-x64.tar.xz
 $ tar -xf node-v6.11.5-linux-x64.tar.xz
 $ rm -rf node-v6.11.5-linux-x64.tar.xz
 $ mv node-v6.11.5-linux-x64 node
-```
 
-```ShellSession
-$ ls node/bin
+
+Добавление nodejs в переменную среды 'PATH
+
+$ ls node/bin # Просмотр содержимого каталога node/bin
+gistup  gistup-open  gistup-rename  node  npm
+
 $ echo ${PATH}
+/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/local/go/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/luna/010editor:/usr/local/src/go/bin
+
 $ export PATH=${PATH}:`pwd`/node/bin
+
 $ echo ${PATH}
+/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/local/go/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/luna/010editor:/usr/local/src/go/bin:/home/luna/workspace/node/bin
 $ mkdir scripts
 $ cat > scripts/activate<<EOF
 export PATH=\${PATH}:`pwd`/node/bin
 EOF
-$ source scripts/activate
-```
+$ source scripts/activate # Исполнение содержимого файла как набора команд
 
-```ShellSession
-$ npm install -g gistup
+Установка утилиты **Gistup для создания 'Gist
+
+$ sudo pacman -S npm # установка npm
+$ npm install -g gistup # установка Gistup
 $ ls node/bin
-```
 
-```ShellSession
+Создание файла '.gistup.json, где находится 'gist token
+
 $ cat > ~/.gistup.json <<EOF
 {
   "token": "${GIST_TOKEN}"
 }
 EOF
-```
+
 
 ## Report
+Cоздание отчета по лабораторной работе 1
 
-```ShellSession
-$ export LAB_NUMBER=01
-$ git clone https://github.com/tp-labs/lab${LAB_NUMBER} tasks/lab${LAB_NUMBER}
-$ mkdir reports/lab${LAB_NUMBER}
-$ cp tasks/lab${LAB_NUMBER}/README.md reports/lab${LAB_NUMBER}/REPORT.md
-$ cd reports/lab${LAB_NUMBER}
-$ edit REPORT.md
-$ gistup -m "lab${LAB_NUMBER}" # enter: yes↵
-```
+$ export LAB_NUMBER=01 # Добавление переменной с номером лабораторной работы
+# Клонирование репозитория  в директорию tasks/lab01
+$ git clone https://github.com/tp-labs/lab01 tasks/lab01 
+$ mkdir reports/lab01 # Создание директории
+$ cp tasks/lab01/README.md reports/lab01/REPORT.md # Копирование файла в каталог
+$ cd reports/lab01 # Переход в каталогreports/lab01
+$ edit REPORT.md # Редактирование файла с помощью nano
+# Создание gist
+$ gistup -m "lab01" # enter: yes↵ 
+
+
 
 ## Links
 
